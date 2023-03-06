@@ -32,7 +32,7 @@ public class MissionEditor : MonoBehaviour
     private void OnDestroy()
     {
         //销毁物体时必须将这个方法从事件动作列表中删除，否则就会因为没法调用这个方法而出错
-        GameEvents.current.EVT_MissionItemClick += ActiveMissionEditor;
+        GameEvents.current.EVT_MissionItemClick -= ActiveMissionEditor;
     }
 
     private void Update()
@@ -65,5 +65,11 @@ public class MissionEditor : MonoBehaviour
         GameEvents.current.BC_MissionEditorConfirm(editingMissionItem);
         
     }
+    public void CancelAndNoSave()
+    {
+        GameEvents.current.BC_MissionEditorCancel();
+        
+    }
+    
     
 }

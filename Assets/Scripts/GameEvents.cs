@@ -41,4 +41,17 @@ public class GameEvents : MonoBehaviour
             EVT_MissionEditorConfirm(missionItem);
         }
     }
+    
+    //关闭MissionEditor并不保存数据的事件
+    public event Action EVT_MissionEditorCancel;
+
+    public void BC_MissionEditorCancel()
+    {
+        if (EVT_MissionEditorCancel!=null)
+        {
+            Debug.Log("成功调用取消事件（未执行）");
+            //该行为调用这个事件动作
+            EVT_MissionEditorCancel();
+        }
+    }
 }
