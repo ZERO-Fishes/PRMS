@@ -41,8 +41,8 @@ public class MissionEditor : MonoBehaviour
         textMissionName.text = editingMissionItem.missionName;
         textMissionProfile.text = editingMissionItem.missionProfile;
         textMissionDeadLine.text = editingMissionItem.missionDeadLine;
-        textMissionCounter.text = editingMissionItem.missionCounter;
-        textMissionCountNum.text = editingMissionItem.missionDeadLine;
+        textMissionCounter.text = editingMissionItem.missionCounter.ToString();
+        textMissionCountNum.text = editingMissionItem.MissionCountNum.ToString();
         missionEditor.SetActive(true);
     }
     
