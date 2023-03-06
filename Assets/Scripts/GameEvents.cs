@@ -27,4 +27,18 @@ public class GameEvents : MonoBehaviour
         }
         
     }
+    
+    
+    //关闭MissionEditor并保存数据的事件
+    public event Action<MissionItem> EVT_MissionEditorConfirm;
+
+    public void BC_MissionEditorConfirm(MissionItem missionItem)
+    {
+        if (EVT_MissionEditorConfirm!=null)
+        {
+            Debug.Log("成功调用确认事件（未执行）");
+            //该行为调用这个事件动作
+            EVT_MissionEditorConfirm(missionItem);
+        }
+    }
 }

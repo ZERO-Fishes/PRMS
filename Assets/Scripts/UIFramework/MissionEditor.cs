@@ -6,6 +6,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public class MissionEditor : MonoBehaviour
 {
@@ -17,7 +18,10 @@ public class MissionEditor : MonoBehaviour
     public TMP_InputField textMissionCounter;
     public TMP_InputField textMissionCountNum;
 
-    private MissionItem editingMissionItem;//用于临时存储MissionItem的数据
+    public GameObject buttonCancel;
+    public GameObject buttonConfirm;
+
+    public MissionItem editingMissionItem;//用于临时存储MissionItem的数据
 
     private void Start()
     {
@@ -31,19 +35,35 @@ public class MissionEditor : MonoBehaviour
         GameEvents.current.EVT_MissionItemClick += ActiveMissionEditor;
     }
 
+    private void Update()
+    {
+        editingMissionItem.missionName=textMissionName.text;
+        editingMissionItem.missionProfile=textMissionProfile.text;
+        editingMissionItem.missionDeadLine=textMissionDeadLine.text;
+        int.TryParse(textMissionCounter.text,out editingMissionItem.missionCounter);
+        int.TryParse(textMissionCountNum.text,out editingMissionItem.missionCountNum);
+    }
+
+
     /// <summary>
     /// 根据MissionItem的数据初始化MissionEditor的窗口数据，并激活窗口
     /// </summary>
     /// <param name="missionItem"></param>
     private void ActiveMissionEditor(MissionItem missionItem)
     {
-        editingMissionItem = missionItem;//暂存MissionItem的数据
-        textMissionName.text = editingMissionItem.missionName;
-        textMissionProfile.text = editingMissionItem.missionProfile;
-        textMissionDeadLine.text = editingMissionItem.missionDeadLine;
-        textMissionCounter.text = editingMissionItem.missionCounter.ToString();
-        textMissionCountNum.text = editingMissionItem.MissionCountNum.ToString();
+        
+        textMissionName.text = missionItem.missionName;
+        textMissionProfile.text = missionItem.missionProfile;
+        textMissionDeadLine.text = missionItem.missionDeadLine;
+        textMissionCounter.text = missionItem.missionCounter.ToString();
+        textMissionCountNum.text = missionItem.missionCountNum.ToString();
         missionEditor.SetActive(true);
+    }
+
+    public void ConfirmAndSave()
+    {
+        GameEvents.current.BC_MissionEditorConfirm(editingMissionItem);
+        
     }
     
 }

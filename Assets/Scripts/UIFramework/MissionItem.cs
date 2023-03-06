@@ -19,7 +19,7 @@ public class MissionItem : MonoBehaviour
     public string missionProfile="None";
     public string missionDeadLine="00:00:00";
     public int missionCounter=0;
-    public int MissionCountNum=1;
+    public int missionCountNum=1;
 
 
     
@@ -41,8 +41,22 @@ public class MissionItem : MonoBehaviour
     
     public void SendClickEvent()//由按钮触发事件，以打开编辑器
     {
+        //监听编辑完成的事件，并调用方法获得编辑结果，覆盖本地数据
+        GameEvents.current.EVT_MissionEditorConfirm += ReceiveData;
+        
         //执行事件动作
         GameEvents.current.BC_MissionItemClick(this);
+    }
+
+    private void ReceiveData(MissionItem missionItem)
+    {
+        this.missionName = missionItem.missionName;
+        this.missionProfile = missionItem.missionProfile;
+        this.missionDeadLine = missionItem.missionDeadLine;
+        this.missionCounter = missionItem.missionCounter;
+        this.missionCountNum = missionItem.missionCountNum;
+        Debug.Log("成功执行确认事件");
+        GameEvents.current.EVT_MissionEditorConfirm -= ReceiveData;//传完之后关闭监听，不知道行不行
     }
     
 }

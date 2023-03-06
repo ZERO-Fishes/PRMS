@@ -425,7 +425,6 @@ GameObject:
   - component: {fileID: 1452462548}
   - component: {fileID: 1452462547}
   - component: {fileID: 1452462546}
-  - component: {fileID: 4346590477772972287}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -535,9 +534,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4346590477772972287}
-        m_TargetAssemblyTypeName: ButtonEventSender, Assembly-CSharp
-        m_MethodName: SendEvent
+      - m_Target: {fileID: 845964719376404567}
+        m_TargetAssemblyTypeName: MissionItem, Assembly-CSharp
+        m_MethodName: SendClickEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -547,19 +546,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4346590477772972287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1452462544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d846791742b49e4eb55ff423b8a8247, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _missionItem: {fileID: 845964719376404567}
 --- !u!1 &1566072036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,11 +1295,11 @@ MonoBehaviour:
   textMissionCounter: {fileID: 845964719070872935}
   textMissionName: {fileID: 845964720900576601}
   textMissionProfile: {fileID: 213025547994190703}
-  missionDeadLine: 00:00:00
   missionName: "\u4EFB\u52A1\u540D\u79F0\u6D4B\u8BD5\u6587\u672C"
   missionProfile: "\u4EFB\u52A1\u7B80\u4ECB\u6D4B\u8BD5\u6587\u672C"
-  sumNum: 0
-  finishedNum: 0
+  missionDeadLine: 00:00:00
+  missionCounter: 0
+  MissionCountNum: 1
 --- !u!1 &845964719754301376
 GameObject:
   m_ObjectHideFlags: 0
