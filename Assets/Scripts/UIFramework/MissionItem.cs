@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 
 public class MissionItem : MonoBehaviour
 {
+    private long MissionItemID;
     public Transform parentObject;
     public TextMeshProUGUI textTimeCounter;
     public TextMeshProUGUI textMissionCounter;
@@ -36,6 +37,12 @@ public class MissionItem : MonoBehaviour
         }
         TimeSpan timeRemain = deadLineTime.Subtract(nowTime);
         textTimeCounter.text= timeRemain.ToString(@"hh\:mm\:ss");
+    }
+    
+    public void SendClickEvent()//由按钮触发事件，以打开编辑器
+    {
+        //执行事件动作
+        GameEvents.current.BC_MissionItemClick(this);
     }
     
 }
