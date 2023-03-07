@@ -1,68 +1,44 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
-using Button = UnityEngine.UI.Button;
+using Unity.VisualScripting;
 
 public class MissionEditor : MonoBehaviour
 {
-    public GameObject missionEditor;
+    public EditorItem editorItemName;
+    public EditorItem editorItemProfile;
+    public EditorItem editorItemDeadLine;
+    public EditorItem editorItemCounter;
+    public EditorItem editorItemCountNum;
     
-    public TMP_InputField textMissionName;
-    public TMP_InputField textMissionProfile;
-    public TMP_InputField textMissionDeadLine;
-    public TMP_InputField textMissionCounter;
-    public TMP_InputField textMissionCountNum;
-
     public GameObject buttonCancel;
     public GameObject buttonConfirm;
 
-    public MissionItem editingMissionItem;//用于临时存储MissionItem的数据
+    public MissionItem MissionItemData;
 
-    private void Start()
+    ///加载Mission Item的数据后会显示在editor中
+    public void GetMissionItemData(MissionItem missionItem)
     {
-        //将该方法添加到事件动作的列表中，表示事件触发时执行该方法，也就是订阅了该事件
-        GameEvents.current.EVT_MissionItemClick += ActiveMissionEditor;
+        MissionItemData = missionItem;
+        editorItemName.LoadMissionItem(MissionItemData.missionName);
+        editorItemProfile.LoadMissionItem(MissionItemData.missionProfile);
+        editorItemDeadLine.LoadMissionItem(MissionItemData.missionDeadLine);
+        editorItemCounter.LoadMissionItem(MissionItemData.missionCounter);
+        editorItemCountNum.LoadMissionItem(MissionItemData.missionCountNum);
     }
 
-    private void OnDestroy()
-    {
-        //销毁物体时必须将这个方法从事件动作列表中删除，否则就会因为没法调用这个方法而出错
-        GameEvents.current.EVT_MissionItemClick -= ActiveMissionEditor;
-    }
-
-    private void Update()
-    {
-        editingMissionItem.missionName=textMissionName.text;
-        editingMissionItem.missionProfile=textMissionProfile.text;
-        editingMissionItem.missionDeadLine=textMissionDeadLine.text;
-        int.TryParse(textMissionCounter.text,out editingMissionItem.missionCounter);
-        int.TryParse(textMissionCountNum.text,out editingMissionItem.missionCountNum);
-    }
-
-
-    /// <summary>
-    /// 根据MissionItem的数据初始化MissionEditor的窗口数据，并激活窗口
-    /// </summary>
-    /// <param name="missionItem"></param>
-    private void ActiveMissionEditor(MissionItem missionItem)
-    {
-        
-        textMissionName.text = missionItem.missionName;
-        textMissionProfile.text = missionItem.missionProfile;
-        textMissionDeadLine.text = missionItem.missionDeadLine;
-        textMissionCounter.text = missionItem.missionCounter.ToString();
-        textMissionCountNum.text = missionItem.missionCountNum.ToString();
-        missionEditor.SetActive(true);
-    }
 
     public void ConfirmAndSave()
     {
-        GameEvents.current.BC_MissionEditorConfirm(editingMissionItem);
+        //根据文本内容更新临时的MissionItem数据
+        MissionItemData.missionName = editorItemName.textInput.text;
+        MissionItemData.missionProfile = editorItemProfile.textInput.text;
+        MissionItemData.missionDeadLine = editorItemDeadLine.textInput.text;
+        int.TryParse(editorItemCounter.textInput.text,out MissionItemData.missionCounter);
+        int.TryParse(editorItemCountNum.textInput.text,out MissionItemData.missionCountNum);
+        GameEvents.current.BC_MissionEditorConfirm(MissionItemData);
         
     }
     public void CancelAndNoSave()
@@ -70,6 +46,4 @@ public class MissionEditor : MonoBehaviour
         GameEvents.current.BC_MissionEditorCancel();
         
     }
-    
-    
 }
