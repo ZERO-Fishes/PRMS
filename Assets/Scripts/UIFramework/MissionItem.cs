@@ -14,7 +14,8 @@ public class MissionItem : MonoBehaviour
     public TextMeshProUGUI textMissionCounter;
     public TextMeshProUGUI textMissionName;
     public TextMeshProUGUI textMissionProfile;
-    public TextMeshProUGUI textMissionDeadLine;
+    public TextMeshProUGUI textMissionDeadLine_Date;
+    public TextMeshProUGUI textMissionDeadLine_Hours;
 
     public string missionName="None";
     public string missionProfile="None";
@@ -32,14 +33,25 @@ public class MissionItem : MonoBehaviour
         //提取出Item中保存的时间，并尝试计算剩余时间
         if (DateTime.TryParse(missionDeadLine,out tempTime))
         {
-            //DeadLine显示方法1：截止日期
-            textMissionDeadLine.text = tempTime.Month.ToString()+'/'+tempTime.Day.ToString();
-
-
+            TimeSpan timeRemained = tempTime.Subtract(System.DateTime.Now.ToLocalTime());
+            if (timeRemained.Hours<=0)//计算出时间为负数表示超时
+            {
+                textMissionDeadLine_Date.text = "Overtime";
+                textMissionDeadLine_Hours.text = "Overtime";
+            }
+            else
+            {
+                //DeadLine显示方法1：截止日期
+                textMissionDeadLine_Date.text = "Date  "+tempTime.Month.ToString()+'/'+tempTime.Day.ToString();
+                //DeadLine显示方法2：剩余小时分钟数
+                textMissionDeadLine_Hours.text = "Remain  "+Convert.ToInt32(timeRemained.TotalHours).ToString() + ":" +
+                                           timeRemained.Minutes.ToString();
+            }
         }
-        else
+        else//无效时间则默认设成无限
         {
-            textMissionDeadLine.text = "INF";
+            textMissionDeadLine_Date.text = "Infinite";
+            textMissionDeadLine_Hours.text = "Infinite";
         }
         
         //DeadLine显示方法2：剩余小时分钟数
