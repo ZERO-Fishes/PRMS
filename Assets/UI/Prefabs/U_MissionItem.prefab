@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 1452462548}
   - component: {fileID: 1452462547}
   - component: {fileID: 1452462546}
+  - component: {fileID: 933740709}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -538,7 +539,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 845964719376404567}
         m_TargetAssemblyTypeName: MissionItem, Assembly-CSharp
-        m_MethodName: SendClickEvent
+        m_MethodName: ItemClickedEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -548,6 +549,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &933740709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452462544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 845964719376404567}
+          m_TargetAssemblyTypeName: MissionItem, Assembly-CSharp
+          m_MethodName: ItemPressedEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1566072036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,7 +1245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &845964719352465305
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1264,10 +1294,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00:00:00
+  m_text: 42%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d3e144f9943556c4bb21860d5f0fcb04, type: 2}
-  m_sharedMaterial: {fileID: -3945220581779748222, guid: d3e144f9943556c4bb21860d5f0fcb04, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06b2d750e7d4a1e448a1b01982c1f72e, type: 2}
+  m_sharedMaterial: {fileID: -4613993309599759100, guid: 06b2d750e7d4a1e448a1b01982c1f72e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1291,8 +1321,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.9
-  m_fontSizeBase: 31.9
+  m_fontSize: 48.51
+  m_fontSizeBase: 48.51
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1436,7 +1466,7 @@ MonoBehaviour:
   textMissionDeadLine_Hours: {fileID: 1624400406}
   missionName: "\u4EFB\u52A1\u540D\u79F0\u6D4B\u8BD5\u6587\u672C"
   missionProfile: "\u4EFB\u52A1\u7B80\u4ECB\u6D4B\u8BD5\u6587\u672C"
-  missionDeadLine: 00:00:00
+  missionDeadLine: 0
   missionCounter: 0
   missionCountNum: 1
 --- !u!1 &845964719754301376
@@ -1649,10 +1679,10 @@ RectTransform:
   m_Father: {fileID: 4912242094985123232}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 144.2, y: -49.6}
-  m_SizeDelta: {x: 246.4, y: 89.2}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &845964720900576606
 CanvasRenderer:
@@ -1889,10 +1919,10 @@ RectTransform:
   m_Father: {fileID: 4912242094985123232}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80.6, y: -122.81}
-  m_SizeDelta: {x: 119.2, y: 43.16}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3473377295643960468
 CanvasRenderer:
@@ -2219,7 +2249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7223701234295962108
 RectTransform:
   m_ObjectHideFlags: 0

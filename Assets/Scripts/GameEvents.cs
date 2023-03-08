@@ -28,6 +28,18 @@ public class GameEvents : MonoBehaviour
         
     }
     
+    //按下MissionItem的事件
+    public event Action<MissionItem> EVT_MissionItemPressed;
+
+    public void BC_MissionItemPressed(MissionItem missionItem)
+    {
+        if (EVT_MissionItemPressed!=null)
+        {
+            //该行为调用这个事件动作
+            EVT_MissionItemPressed(missionItem);
+        }
+    }
+    
     
     //关闭MissionEditor并保存数据的事件
     public event Action<MissionItem> EVT_MissionEditorConfirm;
