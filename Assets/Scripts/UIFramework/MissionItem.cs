@@ -3,30 +3,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine.Serialization;
 
 public class MissionItem : MonoBehaviour
 {
     private long MissionItemID;
     public Transform parentObject;
+    public GameObject ItemButton;
     public TextMeshProUGUI textTimeCounter;
     
-    public TextMeshProUGUI textMissionCounter;
+
     public TextMeshProUGUI textMissionName;
     public TextMeshProUGUI textMissionProfile;
     public TextMeshProUGUI textMissionDeadLine_Date;
     public TextMeshProUGUI textMissionDeadLine_Hours;
+    public TextMeshProUGUI textMissionCounter_Percent;
+    public TextMeshProUGUI textMissionCounter_Rate;
 
     public string missionName="None";
     public string missionProfile="None";
     public string missionDeadLine="00:00:00";
     public int missionCounter=0;
     public int missionCountNum=1;
-    
+
+    private void Start()
+    {
+        missionName = "任务名";
+        missionProfile = "任务简介";
+        missionDeadLine = "";
+        missionCounter = 0;
+        missionCountNum = 1;
+        UpdateMissionCounter();
+    }
 
 
-
-    
     private void Update()
     {
         //MissionItem自身的显示
@@ -40,7 +51,7 @@ public class MissionItem : MonoBehaviour
         if (DateTime.TryParse(missionDeadLine,out tempTime))
         {
             TimeSpan timeRemained = tempTime.Subtract(System.DateTime.Now.ToLocalTime());
-            if (timeRemained.Hours<=0)//计算出时间为负数表示超时
+            if (timeRemained.Hours<0)//计算出时间为负数表示超时
             {
                 textMissionDeadLine_Date.text = "Overtime";
                 textMissionDeadLine_Hours.text = "Overtime";
@@ -75,6 +86,16 @@ public class MissionItem : MonoBehaviour
     {
         GameEvents.current.BC_MissionItemPressed(this);
     }
+    /// <summary>
+    /// 编辑器中的数据传入时更新MissionCounter显示内容
+    /// </summary>
+
+    public int UpdateMissionCounter()
+    {
+        int percent = this.missionCounter*100 / this.missionCountNum;
+        textMissionCounter_Percent.text = percent.ToString();
+        return percent;
+    }
 
 
     private void ReceiveData(MissionItem missionItem)
@@ -84,6 +105,8 @@ public class MissionItem : MonoBehaviour
         this.missionDeadLine = missionItem.missionDeadLine;
         this.missionCounter = missionItem.missionCounter;
         this.missionCountNum = missionItem.missionCountNum;
+        UpdateMissionCounter();//更新MissionCounter文本
+        
         Debug.Log("成功执行确认事件");
         Debug.Log("现在的name是"+missionName);
         GameEvents.current.EVT_MissionEditorConfirm -= ReceiveData;//传完之后关闭监听，不知道行不行
