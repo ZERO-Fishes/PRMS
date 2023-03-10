@@ -104,15 +104,8 @@ public class MissionItemManager : MonoBehaviour
             TextDeadLineFormat = !TextDeadLineFormat;//切换显示的文本
             innerTimeCounter = 0;
             Debug.Log("现在有"+MissionItemSumNum+"个MissionItem");
+            ToggleMissionDeadlineText();
         }
-
-        foreach (GameObject missionItem in MissionItemArray)
-        {
-            missionItem.GetComponent<MissionItem>().textMissionDeadLine_Date.enabled = TextDeadLineFormat;
-            missionItem.GetComponent<MissionItem>().textMissionDeadLine_Hours.enabled = !TextDeadLineFormat;
-        }
-        
-        
         /*//根据PointerDownStatus来累加按钮按下的时间
         if (PointerDownStatus)
         {
@@ -124,6 +117,16 @@ public class MissionItemManager : MonoBehaviour
             OpenButton();
         }*/
 
+    }
+
+    private void ToggleMissionDeadlineText()
+    {
+        foreach (GameObject missionItem in MissionItemArray)
+        {
+            missionItem.GetComponent<MissionItem>().textMissionDeadLine_Date.enabled = TextDeadLineFormat;
+            missionItem.GetComponent<MissionItem>().textMissionDeadLine_Hours.enabled = !TextDeadLineFormat;
+        }
+        
     }
 
 
@@ -158,7 +161,7 @@ public class MissionItemManager : MonoBehaviour
             {
                 Debug.Log("执行完成操作");
                 missionItemToComplete.missionCounter++;
-                if (missionItemToComplete.UpdateMissionCounter() >=100)//达到100%才删除
+                if (missionItemToComplete.UpdateMissionCounterText() >=100)//达到100%才删除
                 {
                     MissionItemArray.Remove(missionItemToComplete.gameObject);
                     Destroy(missionItemToComplete.gameObject);

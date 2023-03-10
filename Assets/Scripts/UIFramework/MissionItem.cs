@@ -34,16 +34,33 @@ public class MissionItem : MonoBehaviour
         missionDeadLine = "";
         missionCounter = 0;
         missionCountNum = 1;
-        UpdateMissionCounter();
+        UpdateMissionCounterText();
     }
 
 
     private void Update()
     {
-        //MissionItem自身的显示
+        DateTime nowTime = System.DateTime.Now.ToLocalTime();
+        if (nowTime.Second==60)
+        {
+            //MissionItem自身的显示
+            UpdateMainText();
+            UpdateDeadLineText_Date();
+            UpdateDeadLineText_Hours();
+            UpdateMissionCounterText();
+        }
+
+        
+
+    }
+    private void UpdateMainText()
+    {
         textMissionName.text = missionName;
         textMissionProfile.text = missionProfile;
-        
+    }
+
+    private void UpdateDeadLineText_Date()
+    {
         //DeadLine文本
         //创建一个临时的date time用来计算时间；初始化时间到今天（防止Item中只填了小时数，没有日期）
         DateTime tempTime = System.DateTime.Now.ToLocalTime();
@@ -54,12 +71,33 @@ public class MissionItem : MonoBehaviour
             if (timeRemained.Hours<0)//计算出时间为负数表示超时
             {
                 textMissionDeadLine_Date.text = "Overtime";
-                textMissionDeadLine_Hours.text = "Overtime";
             }
             else
             {
                 //DeadLine显示方法1：截止日期
                 textMissionDeadLine_Date.text = "Date  "+tempTime.Month.ToString()+'/'+tempTime.Day.ToString();
+            }
+        }
+        else//无效时间则默认设成无限
+        {
+            textMissionDeadLine_Date.text = "Infinite";
+        }
+    }
+    private void UpdateDeadLineText_Hours()
+    {
+        //DeadLine文本
+        //创建一个临时的date time用来计算时间；初始化时间到今天（防止Item中只填了小时数，没有日期）
+        DateTime tempTime = System.DateTime.Now.ToLocalTime();
+        //提取出Item中保存的时间，并尝试计算剩余时间
+        if (DateTime.TryParse(missionDeadLine,out tempTime))
+        {
+            TimeSpan timeRemained = tempTime.Subtract(System.DateTime.Now.ToLocalTime());
+            if (timeRemained.Hours<0)//计算出时间为负数表示超时
+            {
+                textMissionDeadLine_Hours.text = "Overtime";
+            }
+            else
+            {
                 //DeadLine显示方法2：剩余小时分钟数
                 textMissionDeadLine_Hours.text = "Remain  "+Convert.ToInt32(timeRemained.TotalHours).ToString() + ":" +
                                                  timeRemained.Minutes.ToString();
@@ -67,7 +105,6 @@ public class MissionItem : MonoBehaviour
         }
         else//无效时间则默认设成无限
         {
-            textMissionDeadLine_Date.text = "Infinite";
             textMissionDeadLine_Hours.text = "Infinite";
         }
     }
@@ -82,6 +119,9 @@ public class MissionItem : MonoBehaviour
         GameEvents.current.BC_MissionItemClick(this);
     }
 
+    /// <summary>
+    /// MissionItem按下后触发事件，开启编辑器
+    /// </summary>
     public void ItemPressedEvent()
     {
         GameEvents.current.BC_MissionItemPressed(this);
@@ -90,7 +130,7 @@ public class MissionItem : MonoBehaviour
     /// 编辑器中的数据传入时更新MissionCounter显示内容
     /// </summary>
 
-    public int UpdateMissionCounter()
+    public int UpdateMissionCounterText()
     {
         int percent = this.missionCounter*100 / this.missionCountNum;
         textMissionCounter_Percent.text = percent.ToString();
@@ -105,7 +145,10 @@ public class MissionItem : MonoBehaviour
         this.missionDeadLine = missionItem.missionDeadLine;
         this.missionCounter = missionItem.missionCounter;
         this.missionCountNum = missionItem.missionCountNum;
-        UpdateMissionCounter();//更新MissionCounter文本
+        UpdateMainText();
+        UpdateDeadLineText_Date();
+        UpdateDeadLineText_Hours();
+        UpdateMissionCounterText();//更新MissionCounter文本
         
         Debug.Log("成功执行确认事件");
         Debug.Log("现在的name是"+missionName);
