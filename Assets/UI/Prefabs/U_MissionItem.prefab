@@ -1882,8 +1882,8 @@ MonoBehaviour:
   missionItemData: {fileID: 0}
   textMissionName: {fileID: 845964720900576601}
   textMissionProfile: {fileID: 213025547994190703}
-  textMissionDeadLine_Date: {fileID: 1770886831503807379}
-  textMissionDeadLine_Hours: {fileID: 1624400406}
+  textMissionDeadLine_Date: {fileID: 1449024120495011608}
+  textMissionDeadLine_Hours: {fileID: 6162973998962443692}
   textMissionCounter_Percent: {fileID: 1686222468044087016}
   textMissionCounter_Rate: {fileID: 2695136647813245896}
 --- !u!114 &9124481246202384050
@@ -3529,6 +3529,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797547934150206822}
     m_Modifications:
+    - target: {fileID: 581373585157479739, guid: fa39cd25540b51e4fa31c52c8fee5d9b, type: 3}
+      propertyPath: m_Name
+      value: TextDeadlineDate
+      objectReference: {fileID: 0}
     - target: {fileID: 1363983611812914004, guid: fa39cd25540b51e4fa31c52c8fee5d9b, type: 3}
       propertyPath: m_text
       value: 'Deadline: 2023/3/15 12:00'
@@ -3623,6 +3627,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa39cd25540b51e4fa31c52c8fee5d9b, type: 3}
+--- !u!114 &1449024120495011608 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1363983611812914004, guid: fa39cd25540b51e4fa31c52c8fee5d9b, type: 3}
+  m_PrefabInstance: {fileID: 501623716896298060}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8169087435208386084 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8622226842535866984, guid: fa39cd25540b51e4fa31c52c8fee5d9b, type: 3}
@@ -3635,6 +3650,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797547934150206822}
     m_Modifications:
+    - target: {fileID: 770060284193794751, guid: ec0e4b03abb48cb408731ea08032adc0, type: 3}
+      propertyPath: m_Name
+      value: TextTimeRemained
+      objectReference: {fileID: 0}
     - target: {fileID: 1176405233984246992, guid: ec0e4b03abb48cb408731ea08032adc0, type: 3}
       propertyPath: m_text
       value: 'Time Remained: 110.12h'
@@ -3734,6 +3753,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8437199425703151084, guid: ec0e4b03abb48cb408731ea08032adc0, type: 3}
   m_PrefabInstance: {fileID: 5031688880989573500}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6162973998962443692 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1176405233984246992, guid: ec0e4b03abb48cb408731ea08032adc0, type: 3}
+  m_PrefabInstance: {fileID: 5031688880989573500}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6456291316550926486
 PrefabInstance:
   m_ObjectHideFlags: 0

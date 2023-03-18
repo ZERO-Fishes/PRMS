@@ -137,11 +137,9 @@ public class MissionItemManager : MonoBehaviour
 
         if (innerTimeCounter>4f)//4秒执行一次
         {
-            TextDeadLineFormat = !TextDeadLineFormat;//切换显示的文本
-            TextCounterFormat = !TextCounterFormat;//切换显示的文本
             innerTimeCounter = 0;
             Debug.Log("现在有"+MissionItemSumNum+"个MissionItem");
-            ToggleMissionDeadlineText();
+            TextCounterFormat = !TextCounterFormat;
             ToggleMissionCounterText();
         }
         /*//根据PointerDownStatus来累加按钮按下的时间
@@ -157,14 +155,7 @@ public class MissionItemManager : MonoBehaviour
 
     }
 
-    private void ToggleMissionDeadlineText()
-    {
-        foreach (GameObject missionItem in MissionItemArray)
-        {
-            missionItem.GetComponent<MissionItem>().textMissionDeadLine_Date.enabled = TextDeadLineFormat;
-            missionItem.GetComponent<MissionItem>().textMissionDeadLine_Hours.enabled = !TextDeadLineFormat;
-        }
-    }
+
 
     private void ToggleMissionCounterText()
     {
@@ -173,7 +164,7 @@ public class MissionItemManager : MonoBehaviour
             missionItem.GetComponent<MissionItem>().textMissionCounter_Percent.enabled = TextCounterFormat;
             missionItem.GetComponent<MissionItem>().textMissionCounter_Rate.enabled = !TextCounterFormat;
         }
-
+        Debug.Log("触发一次进度显示切换");
     }
 
 

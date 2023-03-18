@@ -132,20 +132,20 @@ public class MissionItem : MonoBehaviour
         //提取出Item中保存的时间，并尝试计算剩余时间
         if (DateTime.TryParse(MissionDeadLine,out tempTime))
         {
-            TimeSpan timeRemained = tempTime.Subtract(System.DateTime.Now.ToLocalTime());
+            TimeSpan timeRemained = tempTime.Subtract(System.DateTime.Now.ToLocalTime());//计算时间差
             if (timeRemained.Hours<0)//计算出时间为负数表示超时
             {
-                textMissionDeadLine_Date.text = "Overtime";
+                textMissionDeadLine_Date.text = "Deadline:"+MissionDeadLine+"(OverTime)";
             }
             else
             {
                 //DeadLine显示方法1：截止日期
-                textMissionDeadLine_Date.text = "Date  "+tempTime.Month.ToString()+'/'+tempTime.Day.ToString();
+                textMissionDeadLine_Date.text = "Deadline:"+MissionDeadLine;
             }
         }
-        else//无效时间则默认设成无限
+        else//无效时间
         {
-            textMissionDeadLine_Date.text = "Infinite";
+            textMissionDeadLine_Date.text = "Deadline:Incorrect time format";
         }
     }
     private void UpdateDeadLineText_Hours()
@@ -159,18 +159,17 @@ public class MissionItem : MonoBehaviour
             TimeSpan timeRemained = tempTime.Subtract(System.DateTime.Now.ToLocalTime());
             if (timeRemained.Hours<0)//计算出时间为负数表示超时
             {
-                textMissionDeadLine_Hours.text = "Overtime";
+                textMissionDeadLine_Hours.text = "Time remained:Overtime";
             }
             else
             {
                 //DeadLine显示方法2：剩余小时分钟数
-                textMissionDeadLine_Hours.text = "Remain  "+Convert.ToInt32(timeRemained.TotalHours).ToString() + ":" +
-                                                 timeRemained.Minutes.ToString();
+                textMissionDeadLine_Hours.text = "Time remained:"+timeRemained.TotalHours.ToString("0.00")+"h";
             }
         }
         else//无效时间则默认设成无限
         {
-            textMissionDeadLine_Hours.text = "Infinite";
+            textMissionDeadLine_Hours.text = "Time remained:Incorrect time format";
         }
     }
     
@@ -199,9 +198,9 @@ public class MissionItem : MonoBehaviour
             this.MissionCountNum = 1;
         }
         percent= this.MissionCounter*100 / this.MissionCountNum;
-
-         
+        
         textMissionCounter_Percent.text = percent.ToString()+"%";
+        textMissionCounter_Rate.text = MissionCounter + "/" + MissionCountNum;
         return percent;
     }
 
