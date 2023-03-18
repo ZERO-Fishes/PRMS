@@ -19,31 +19,46 @@ public class MissionEditor : MonoBehaviour
     public MissionItem MissionItemData;
 
     ///加载Mission Item的数据后会显示在editor中
-    public void GetMissionItemData(MissionItem missionItem)
+
+
+    public void updateMissionEditor(MissionItemData_SO missionItemDataSo)
     {
-        MissionItemData = missionItem;
-        editorItemName.LoadMissionItem(MissionItemData.missionName);
-        editorItemProfile.LoadMissionItem(MissionItemData.missionProfile);
-        editorItemDeadLine.LoadMissionItem(MissionItemData.missionDeadLine);
-        editorItemCounter.LoadMissionItem(MissionItemData.missionCounter);
-        editorItemCountNum.LoadMissionItem(MissionItemData.missionCountNum);
+        editorItemName.LoadMissionItem(missionItemDataSo.missionName);
+        editorItemProfile.LoadMissionItem(missionItemDataSo.missionProfile);
+        editorItemDeadLine.LoadMissionItem(missionItemDataSo.missionDeadLine);
+        editorItemCounter.LoadMissionItem(missionItemDataSo.missionCounter);
+        editorItemCountNum.LoadMissionItem(missionItemDataSo.missionCountNum);
+    }
+
+    public void updateEditorItemData(MissionItemData_SO editorItemData)
+    {
+        editorItemData.missionName = editorItemName.textInput.text;
+        editorItemData.missionProfile = editorItemProfile.textInput.text;
+        editorItemData.missionDeadLine = editorItemDeadLine.textInput.text;
+        int temp;
+        int.TryParse(editorItemCounter.textInput.text,out temp);
+        editorItemData.missionCounter = temp;
+        int.TryParse(editorItemCountNum.textInput.text,out temp);
+        editorItemData.missionCountNum = temp;
     }
 
 
-    public void ConfirmAndSave()
+    /*public void ConfirmAndSave()
     {
         //根据文本内容更新临时的MissionItem数据
-        MissionItemData.missionName = editorItemName.textInput.text;
-        MissionItemData.missionProfile = editorItemProfile.textInput.text;
-        MissionItemData.missionDeadLine = editorItemDeadLine.textInput.text;
-        int.TryParse(editorItemCounter.textInput.text,out MissionItemData.missionCounter);
-        int.TryParse(editorItemCountNum.textInput.text,out MissionItemData.missionCountNum);
+        MissionItemData.MissionName = editorItemName.textInput.text;
+        MissionItemData.MissionProfile = editorItemProfile.textInput.text;
+        MissionItemData.MissionDeadLine = editorItemDeadLine.textInput.text;
+        int temp;
+        int.TryParse(editorItemCounter.textInput.text,out temp);
+        MissionItemData.MissionCounter = temp;
+        int.TryParse(editorItemCountNum.textInput.text,out temp);
+        MissionItemData.MissionCountNum = temp;
         GameEvents.current.BC_MissionEditorConfirm(MissionItemData);
         
-    }
-    public void CancelAndNoSave()
+    }*/
+    /*public void CancelAndNoSave()
     {
         GameEvents.current.BC_MissionEditorCancel();
-        
-    }
+    }*/
 }

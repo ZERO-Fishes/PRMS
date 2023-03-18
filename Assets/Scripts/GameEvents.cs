@@ -41,7 +41,7 @@ public class GameEvents : MonoBehaviour
     }
     
     
-    //关闭MissionEditor并保存数据的事件
+    /*//关闭MissionEditor并保存数据的事件
     public event Action<MissionItem> EVT_MissionEditorConfirm;
 
     public void BC_MissionEditorConfirm(MissionItem missionItem)
@@ -65,5 +65,5 @@ public class GameEvents : MonoBehaviour
             //该行为调用这个事件动作
             EVT_MissionEditorCancel();
         }
-    }
+    }*/
 }

@@ -7,7 +7,7 @@ public class EditorItem : MonoBehaviour
 {
     public TMP_InputField textInput;
 
-    
+
     ///显示Mission Item中传来的string数据
     public void LoadMissionItem(string missionItemString)
     {
