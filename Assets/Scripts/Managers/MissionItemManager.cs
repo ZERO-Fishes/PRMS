@@ -43,8 +43,8 @@ public class MissionItemManager : MonoBehaviour
     {
         //监听按钮按下的事件
         GameEvents.current.EVT_MissionItemPressed += deleteMissionItem;
-
-        SaveManager.Instance.LoadLocalDatas();
+        Instance.LoadItemDataBank();
+        Instance.InitializeMissionArea();
     }
 
     private void OnDestroy()

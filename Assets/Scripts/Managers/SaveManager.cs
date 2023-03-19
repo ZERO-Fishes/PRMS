@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class SaveManager : MonoBehaviour
 {
@@ -13,6 +16,11 @@ public class SaveManager : MonoBehaviour
     //保存已有的MissionItem的数量
     public long MissionItemCount;
     public List<long> MissionItemIDArray;
+
+    private void Start()
+    {
+        
+    }
 
     public void Save(Object data,string key)
     {
@@ -42,12 +50,13 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.DeleteAll();
         Debug.Log("清除所有数据");
         StatusManager.Instance.ClearStatusData();
+        LoadLocalDatas();//重新加载数据
     }
 
-    public void LoadLocalDatas()
+    public void LoadLocalDatas()//加载本地数据
     {
-
         MissionItemManager.Instance.LoadItemDataBank();
         MissionItemManager.Instance.InitializeMissionArea();
+        StatusManager.Instance.LoadStatusData();
     }
 }

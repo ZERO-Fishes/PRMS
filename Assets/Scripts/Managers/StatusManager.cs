@@ -44,19 +44,20 @@ public class StatusManager : MonoBehaviour
 
     public void ClearStatusData()
     {
-        var json = JsonUtility.ToJson(statusDataSo_Temp);
-        JsonUtility.FromJsonOverwrite(json,statusDataSo);
+        var json = JsonUtility.ToJson(Instance.statusDataSo_Temp);
+        JsonUtility.FromJsonOverwrite(json,Instance.statusDataSo);
         UpdateTexts();
         SaveStatusData();
     }
 
     public void LoadStatusData()
     {
-        SaveManager.Instance.Load(statusDataSo,"StatusData");
+        SaveManager.Instance.Load(Instance.statusDataSo,"StatusData");
+        UpdateTexts();
     }
     public void SaveStatusData()
     {
-        SaveManager.Instance.Save(statusDataSo,"StatusData");
+        SaveManager.Instance.Save(Instance.statusDataSo,"StatusData");
     }
 
     public void GetMissionItemAwards(MissionItemData_SO missionItemDataSo)//用于计算任务完成的奖励
