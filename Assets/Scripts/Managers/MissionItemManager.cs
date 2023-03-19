@@ -85,10 +85,16 @@ public class MissionItemManager : MonoBehaviour
         tempstring=PlayerPrefs.GetString("IDs");
         string[] stringArray = tempstring.Split(",");//提取IDs
         MissionItemDataIDs.Clear();
-        foreach (var str in stringArray)
+        long templong;
+        if (long.TryParse(stringArray[0],out templong))
         {
-            MissionItemDataIDs.Add(long.Parse(str));
+            foreach (var str in stringArray)
+            {
+                MissionItemDataIDs.Add(long.Parse(str));
+            }
         }
+        
+
         tempstring=PlayerPrefs.GetString("SumNum");
         long.TryParse(tempstring,out MissionItemSumNum);
         tempstring=PlayerPrefs.GetString("ID");
