@@ -18,7 +18,8 @@ public class MissionItemData_SO : ScriptableObject
     [Header("Processing")]
     public int missionCounter;
     public int missionCountNum;
-    [Header("Award")]
+    [Header("Award")] 
+    public long missionExp;
     public int missionDiamond;
     public int missionAwardType;
     public int missionAwardNum;

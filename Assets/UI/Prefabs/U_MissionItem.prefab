@@ -1886,6 +1886,8 @@ MonoBehaviour:
   textMissionDeadLine_Hours: {fileID: 6162973998962443692}
   textMissionCounter_Percent: {fileID: 1686222468044087016}
   textMissionCounter_Rate: {fileID: 2695136647813245896}
+  textMissionDiamond: {fileID: 8424469194221287940}
+  textMissionAwardValue: {fileID: 2190427043735927956}
 --- !u!114 &9124481246202384050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2146,7 +2148,7 @@ GameObject:
   - component: {fileID: 180025049556725403}
   - component: {fileID: 9217187584023680780}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: DiamondImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2653,7 +2655,7 @@ GameObject:
   - component: {fileID: 2645476455018361906}
   - component: {fileID: 8424469194221287940}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: DiamonCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2788,7 +2790,7 @@ GameObject:
   - component: {fileID: 5425472770057443692}
   - component: {fileID: 975970873586812115}
   m_Layer: 5
-  m_Name: Image
+  m_Name: AwardImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2865,7 +2867,7 @@ GameObject:
   - component: {fileID: 6023984126691323784}
   - component: {fileID: 2190427043735927956}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AwardValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

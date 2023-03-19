@@ -16,11 +16,12 @@ MonoBehaviour:
   missionItemID: 0
   missionName: "\u4EFB\u52A1\u540D\u6A21\u677F"
   missionProfile: "\u4EFB\u52A1\u7B80\u4ECB\u6A21\u677F"
-  missionDeadLine: 
+  missionDeadLine: 2000/1/1
   missionRepeatMode: 0
   missionTag: 0
   missionCounter: 0
-  missionCountNum: 0
-  missionDiamond: 0
-  missionAwardType: 0
-  missionAwardNum: 0
+  missionCountNum: 1
+  missionExp: 10
+  missionDiamond: 1
+  missionAwardType: 1
+  missionAwardNum: 1

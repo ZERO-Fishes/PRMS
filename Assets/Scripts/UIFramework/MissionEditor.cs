@@ -12,6 +12,10 @@ public class MissionEditor : MonoBehaviour
     public EditorItem editorItemDeadLine;
     public EditorItem editorItemCounter;
     public EditorItem editorItemCountNum;
+    public EditorItem editorItemDiamond;
+    public EditorItem editorItemAwardType;
+    public EditorItem editorItemAwardValue;
+    public EditorItem editorItemExp;
     
     public GameObject buttonCancel;
     public GameObject buttonConfirm;
@@ -19,8 +23,6 @@ public class MissionEditor : MonoBehaviour
     public MissionItem MissionItemData;
 
     ///加载Mission Item的数据后会显示在editor中
-
-
     public void updateMissionEditor(MissionItemData_SO missionItemDataSo)
     {
         editorItemName.LoadMissionItem(missionItemDataSo.missionName);
@@ -28,8 +30,14 @@ public class MissionEditor : MonoBehaviour
         editorItemDeadLine.LoadMissionItem(missionItemDataSo.missionDeadLine);
         editorItemCounter.LoadMissionItem(missionItemDataSo.missionCounter);
         editorItemCountNum.LoadMissionItem(missionItemDataSo.missionCountNum);
+        editorItemDiamond.LoadMissionItem(missionItemDataSo.missionDiamond);
+        editorItemAwardType.LoadMissionItem(missionItemDataSo.missionAwardType);
+        editorItemAwardValue.LoadMissionItem(missionItemDataSo.missionAwardNum);
+        editorItemExp.LoadMissionItem(missionItemDataSo.missionExp);
+        
     }
 
+    //用editor里的值更新MissionItem的数据
     public void updateEditorItemData(MissionItemData_SO editorItemData)
     {
         editorItemData.missionName = editorItemName.textInput.text;
@@ -40,6 +48,14 @@ public class MissionEditor : MonoBehaviour
         editorItemData.missionCounter = temp;
         int.TryParse(editorItemCountNum.textInput.text,out temp);
         editorItemData.missionCountNum = temp;
+        int.TryParse(editorItemDiamond.textInput.text,out temp);
+        editorItemData.missionDiamond = temp;
+        int.TryParse(editorItemAwardType.textInput.text,out temp);
+        editorItemData.missionAwardType= temp;
+        int.TryParse(editorItemAwardValue.textInput.text,out temp);
+        editorItemData.missionAwardNum = temp;
+        int.TryParse(editorItemExp.textInput.text,out temp);
+        editorItemData.missionExp = temp;
     }
 
 

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e3d53730eb0464bba988c46f5c3bce, type: 3}
+  m_Name: New StatusData
+  m_EditorClassIdentifier: 
+  Exp: 5230
+  TagName_1: "\u6280\u672F\u529B"
+  TagValue_1: 3
+  TagName_2: "\u8111\u529B"
+  TagValue_2: 0
+  TagName_3: "\u4F53\u529B"
+  TagValue_3: 0
+  TagName_4: "\u7F8E\u672F\u529B"
+  TagValue_4: 0
+  TagName_5: "\u97F3\u4E50\u529B"
+  TagValue_5: 100
+  DiamondCount: 3

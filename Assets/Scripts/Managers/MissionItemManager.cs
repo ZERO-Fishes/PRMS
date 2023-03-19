@@ -32,15 +32,9 @@ public class MissionItemManager : MonoBehaviour
     public long MissionItemNowID = 0;
     
     
-    /// 记录指针状态，是按下还是松开
-    private bool PointerDownStatus;
-    ///记录指针按下的时间，超过一定值再启用按钮
-    private float PointerDownTime=0;
+
     ///内置计时，用于定时切换
     private float innerTimeCounter=0;
-    ///用于选择一种DeadLine文本进行展示
-    private bool TextDeadLineFormat=false;
-
     private bool TextCounterFormat=false;
 
 
@@ -49,9 +43,8 @@ public class MissionItemManager : MonoBehaviour
     {
         //监听按钮按下的事件
         GameEvents.current.EVT_MissionItemPressed += deleteMissionItem;
-        //addMissionItem();
-        //初始化按下的时间
-        PointerDownTime = 0;
+
+        SaveManager.Instance.LoadLocalDatas();
     }
 
     private void OnDestroy()
@@ -103,6 +96,7 @@ public class MissionItemManager : MonoBehaviour
     }
 
     public MissionItemData_SO missionItemDataSo;
+    
     public void InitializeMissionArea()//初始化MissionArea
     {
         foreach (var missionItem in MissionItemArray)
@@ -142,16 +136,6 @@ public class MissionItemManager : MonoBehaviour
             TextCounterFormat = !TextCounterFormat;
             ToggleMissionCounterText();
         }
-        /*//根据PointerDownStatus来累加按钮按下的时间
-        if (PointerDownStatus)
-        {
-            PointerDownTime += Time.deltaTime;
-        }
-
-        if (PointerDownTime>2&&PointerDownTime<3)
-        {
-            OpenButton();
-        }*/
 
     }
 
@@ -168,6 +152,7 @@ public class MissionItemManager : MonoBehaviour
     }
 
 
+    
     public float detectDistance=600;
     //滑动触发的事件
     public void deleteMissionItem(MissionItem missionItemToComplete)
@@ -179,19 +164,24 @@ public class MissionItemManager : MonoBehaviour
     //删除过程的协程
     IEnumerator CoroutineDeleteMissionItem(MissionItem missionItemToComplete)
     {
-        float moveDistance = 0;//记录手指的累计移动距离
+        float moveDistance = 0;
         while (Input.touchCount > 0)//当手指还在屏幕上时
         {
+            //记录手指的累计移动距离
             Touch touch = Input.GetTouch(0);
             moveDistance += touch.deltaPosition.x;
             Debug.Log("手指当前横向移动距离为"+moveDistance);
             Debug.Log("当前手指数为"+Input.touchCount);
+            //大于一定距离视为完成
             if (moveDistance>detectDistance)
             {
                 Debug.Log("执行完成操作");
-                missionItemToComplete.MissionCounter++;//达到100%才删除
-                if (missionItemToComplete.UpdateMissionCounterText() >=100)
+                missionItemToComplete.MissionCounter++;
+                if (missionItemToComplete.UpdateMissionCounterText() >=100)//达到100%才删除
                 {
+                    //获取奖励
+                    StatusManager.Instance.GetMissionItemAwards(missionItemToComplete.missionItemData);
+                    //删除实例，引用与硬盘存储
                     DeleteMissionItem(missionItemToComplete);
                 }
                 else//否则更新进度并保存

@@ -8,6 +8,6 @@ public class KeepAwake : MonoBehaviour
     private void Awake()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        Application.targetFrameRate = 120;
+        //Application.targetFrameRate = 120;
     }
 }

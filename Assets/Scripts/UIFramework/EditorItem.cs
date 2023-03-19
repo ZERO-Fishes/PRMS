@@ -19,5 +19,10 @@ public class EditorItem : MonoBehaviour
 
         textInput.text = missionItemInt.ToString();
     }
+    public void LoadMissionItem(long missionItemInt)
+    {
+
+        textInput.text = missionItemInt.ToString();
+    }
     
 }

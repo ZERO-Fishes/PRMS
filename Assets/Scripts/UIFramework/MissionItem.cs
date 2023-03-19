@@ -22,6 +22,9 @@ public class MissionItem : MonoBehaviour
     public TextMeshProUGUI textMissionCounter_Percent;
     public TextMeshProUGUI textMissionCounter_Rate;
     
+    public TextMeshProUGUI textMissionDiamond;
+    public TextMeshProUGUI textMissionAwardValue;
+    
 
     #region Read from MissionItemData_SO
     public string MissionName
@@ -87,10 +90,7 @@ public class MissionItem : MonoBehaviour
     private void Start()
     {
         //MissionItem自身的显示
-        UpdateMainText();
-        UpdateDeadLineText_Date();
-        UpdateDeadLineText_Hours();
-        UpdateMissionCounterText();
+        UpdateMisisonItem();
     }
 
 
@@ -100,23 +100,32 @@ public class MissionItem : MonoBehaviour
         if (nowTime.Second==60)
         {
             //MissionItem自身的显示
-            UpdateMainText();
-            UpdateDeadLineText_Date();
-            UpdateDeadLineText_Hours();
-            UpdateMissionCounterText();
+            UpdateMisisonItem();
         }
 
         if (missionItemData.NeedToUpdate==true)
         {
-            UpdateMainText();
-            UpdateDeadLineText_Date();
-            UpdateDeadLineText_Hours();
-            UpdateMissionCounterText();
+            UpdateMisisonItem();
             missionItemData.NeedToUpdate = false;
         }
 
         
 
+    }
+
+    public void UpdateMisisonItem()
+    {
+        UpdateMainText();
+        UpdateDeadLineText_Date();
+        UpdateDeadLineText_Hours();
+        UpdateMissionCounterText();
+        UpdateAwards();
+    }
+
+    private void UpdateAwards()
+    {
+        textMissionDiamond.text = MissionDiamond.ToString();
+        textMissionAwardValue.text = MissionAwardNum.ToString();
     }
     private void UpdateMainText()
     {
@@ -135,17 +144,17 @@ public class MissionItem : MonoBehaviour
             TimeSpan timeRemained = tempTime.Subtract(System.DateTime.Now.ToLocalTime());//计算时间差
             if (timeRemained.Hours<0)//计算出时间为负数表示超时
             {
-                textMissionDeadLine_Date.text = "Deadline:"+MissionDeadLine+"(OverTime)";
+                textMissionDeadLine_Date.text = "DDL:"+MissionDeadLine+"(OverTime)";
             }
             else
             {
                 //DeadLine显示方法1：截止日期
-                textMissionDeadLine_Date.text = "Deadline:"+MissionDeadLine;
+                textMissionDeadLine_Date.text = "DDL:"+MissionDeadLine;
             }
         }
         else//无效时间
         {
-            textMissionDeadLine_Date.text = "Deadline:Incorrect time format";
+            textMissionDeadLine_Date.text = "DDL:Invalid time";
         }
     }
     private void UpdateDeadLineText_Hours()
@@ -157,7 +166,7 @@ public class MissionItem : MonoBehaviour
         if (DateTime.TryParse(MissionDeadLine,out tempTime))
         {
             TimeSpan timeRemained = tempTime.Subtract(System.DateTime.Now.ToLocalTime());
-            if (timeRemained.Hours<0)//计算出时间为负数表示超时
+            if (timeRemained.TotalHours<0)//计算出时间为负数表示超时
             {
                 textMissionDeadLine_Hours.text = "Time remained:Overtime";
             }
@@ -169,7 +178,7 @@ public class MissionItem : MonoBehaviour
         }
         else//无效时间则默认设成无限
         {
-            textMissionDeadLine_Hours.text = "Time remained:Incorrect time format";
+            textMissionDeadLine_Hours.text = "Time remained:Invalid time";
         }
     }
     

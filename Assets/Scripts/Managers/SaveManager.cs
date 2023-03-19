@@ -41,6 +41,7 @@ public class SaveManager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         Debug.Log("清除所有数据");
+        StatusManager.Instance.ClearStatusData();
     }
 
     public void LoadLocalDatas()
