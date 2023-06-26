@@ -101,7 +101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8450534895731344971, guid: 17facb2dc39b6b946aee5bc77e1f6142, type: 3}
       propertyPath: m_Name
-      value: "Status Tag\u2014\u2014\u72D9\u51FB"
+      value: "Status Tag\u2014\u2014\u72D9\u51FB Variant"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17facb2dc39b6b946aee5bc77e1f6142, type: 3}
