@@ -68,26 +68,31 @@ public class StatusManager : MonoBehaviour
             case 1:
             {
                 statusDataSo.TagValue_1 += missionItemDataSo.missionAwardNum;
+                AppriseManager.Instance.NTC_AddProperty(statusDataSo.TagName_1,missionItemDataSo.missionAwardNum,statusDataSo.TagValue_1);
                 break;
             }
             case 2:
             {
                 statusDataSo.TagValue_2 += missionItemDataSo.missionAwardNum;
+                AppriseManager.Instance.NTC_AddProperty(statusDataSo.TagName_2,missionItemDataSo.missionAwardNum,statusDataSo.TagValue_2);
                 break;
             }
             case 3:
             {
                 statusDataSo.TagValue_3 += missionItemDataSo.missionAwardNum;
+                AppriseManager.Instance.NTC_AddProperty(statusDataSo.TagName_3,missionItemDataSo.missionAwardNum,statusDataSo.TagValue_3);
                 break;
             }
             case 4:
             {
                 statusDataSo.TagValue_4 += missionItemDataSo.missionAwardNum;
+                AppriseManager.Instance.NTC_AddProperty(statusDataSo.TagName_4,missionItemDataSo.missionAwardNum,statusDataSo.TagValue_4);
                 break;
             }
             case 5:
             {
                 statusDataSo.TagValue_5 += missionItemDataSo.missionAwardNum;
+                AppriseManager.Instance.NTC_AddProperty(statusDataSo.TagName_5,missionItemDataSo.missionAwardNum,statusDataSo.TagValue_5);
                 break;
             }
         }

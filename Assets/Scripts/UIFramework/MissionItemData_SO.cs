@@ -14,10 +14,23 @@ public class MissionItemData_SO : ScriptableObject
     public string missionProfile;
     public string missionDeadLine;
     public int missionRepeatMode;
+    /// <summary>
+    /// 0:一次性
+    /// 1:重复
+    /// </summary>
     public int missionTag;
+    
+    /// <summary>
+    /// 重复次数计数器
+    /// </summary>
     [Header("Processing")]
     public int missionCounter;
+    /// <summary>
+    ///重复次数总数
+    /// </summary>
     public int missionCountNum;
+
+    public bool missionCompletedToday;
     [Header("Award")] 
     public long missionExp;
     public int missionDiamond;

@@ -9,6 +9,7 @@ public class MissionEditor : MonoBehaviour
 {
     public EditorItem editorItemName;
     public EditorItem editorItemProfile;
+    public EditorItem editorItemTag;
     public EditorItem editorItemDeadLine;
     public EditorItem editorItemCounter;
     public EditorItem editorItemCountNum;
@@ -27,6 +28,7 @@ public class MissionEditor : MonoBehaviour
     {
         editorItemName.LoadMissionItem(missionItemDataSo.missionName);
         editorItemProfile.LoadMissionItem(missionItemDataSo.missionProfile);
+        editorItemTag.LoadMissionItem(missionItemDataSo.missionTag);
         editorItemDeadLine.LoadMissionItem(missionItemDataSo.missionDeadLine);
         editorItemCounter.LoadMissionItem(missionItemDataSo.missionCounter);
         editorItemCountNum.LoadMissionItem(missionItemDataSo.missionCountNum);
@@ -40,10 +42,13 @@ public class MissionEditor : MonoBehaviour
     //用editor里的值更新MissionItem的数据
     public void updateEditorItemData(MissionItemData_SO editorItemData)
     {
+        int temp;
         editorItemData.missionName = editorItemName.textInput.text;
         editorItemData.missionProfile = editorItemProfile.textInput.text;
+        int.TryParse(editorItemTag.textInput.text,out temp);
+        editorItemData.missionTag = temp;
         editorItemData.missionDeadLine = editorItemDeadLine.textInput.text;
-        int temp;
+        
         int.TryParse(editorItemCounter.textInput.text,out temp);
         editorItemData.missionCounter = temp;
         int.TryParse(editorItemCountNum.textInput.text,out temp);

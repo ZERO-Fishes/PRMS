@@ -19,14 +19,16 @@ public class MissionEditorManager : MonoBehaviour
     
     public GameObject missionEditor;
     private MissionItemData_SO editorItemData;
+    private MissionItem missionItemObj;
 
     
 
 
     //接受ItemManager数据，打开并刷新Editor，供Item Manager调用
-    public void ReceiveItemAndOpenEditor(MissionItemData_SO missionItemDataSo)
+    public void ReceiveItemAndOpenEditor(MissionItemData_SO missionItemDataSo,MissionItem missionItemObj)
     {
         Instance.editorItemData = missionItemDataSo;//接受数据
+        Instance.missionItemObj = missionItemObj;//接受Item对象(可行性未知)
         //用数据初始化Editor窗口
         OpenMissionEditor(Instance.editorItemData);
 
@@ -40,6 +42,15 @@ public class MissionEditorManager : MonoBehaviour
         //刷新Item实例
         Instance.editorItemData.NeedToUpdate = true;
     }
+
+    public void CloseEditorAndDeleteItem()//供按下按钮调用
+    {
+        MissionItemManager.Instance.DestroyMissionItem(missionItemObj);
+        AppriseManager.Instance.NTC_DeleteItem();//通知
+        missionEditor.gameObject.SetActive(false);//关闭窗口
+        
+    }
+    
     
     
     

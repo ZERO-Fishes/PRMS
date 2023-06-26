@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 public class MissionItem : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class MissionItem : MonoBehaviour
     
     public TextMeshProUGUI textMissionDiamond;
     public TextMeshProUGUI textMissionAwardValue;
+
+    public GameObject MissionCompletedImage;
     
 
     #region Read from MissionItemData_SO
@@ -108,9 +111,6 @@ public class MissionItem : MonoBehaviour
             UpdateMisisonItem();
             missionItemData.NeedToUpdate = false;
         }
-
-        
-
     }
 
     public void UpdateMisisonItem()
@@ -120,6 +120,7 @@ public class MissionItem : MonoBehaviour
         UpdateDeadLineText_Hours();
         UpdateMissionCounterText();
         UpdateAwards();
+        UpdateCompletedImage();
     }
 
     private void UpdateAwards()
@@ -191,7 +192,7 @@ public class MissionItem : MonoBehaviour
         //执行事件动作
         GameEvents.current.BC_MissionItemClick(this);*/
         //打开编辑器
-        MissionEditorManager.Instance.ReceiveItemAndOpenEditor(missionItemData);
+        MissionEditorManager.Instance.ReceiveItemAndOpenEditor(missionItemData,this);
     }
 
 
@@ -213,9 +214,27 @@ public class MissionItem : MonoBehaviour
         return percent;
     }
 
+    public void UpdateCompletedImage()
+    {
+        if (missionItemData.missionCompletedToday)
+        {
+            MissionCompletedImage.SetActive(true);
+        }
+        else
+        {
+            MissionCompletedImage.SetActive(false);
+        }
+    }
+
     public void ItemPressedEvent()//按钮按下后触发ItemManager中的方法
     {
         MissionItemManager.Instance.deleteMissionItem(this);
+    }
+
+    public void RefreshMissionItem()
+    {
+        this.missionItemData.missionCounter = 0;
+        UpdateMisisonItem();
     }
 
     /*private void ReceiveData(MissionItem missionItem)

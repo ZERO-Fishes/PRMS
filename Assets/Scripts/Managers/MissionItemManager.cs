@@ -187,13 +187,21 @@ public class MissionItemManager : MonoBehaviour
                 {
                     //获取奖励
                     StatusManager.Instance.GetMissionItemAwards(missionItemToComplete.missionItemData);
-                    //删除实例，引用与硬盘存储
-                    DeleteMissionItem(missionItemToComplete);
+                    if (missionItemToComplete.missionItemData.missionTag==0)
+                    {
+                        //删除实例，引用与硬盘存储
+                        DestroyMissionItem(missionItemToComplete);
+                    }
+                    else if (missionItemToComplete.missionItemData.missionTag == 1)
+                    {
+                        missionItemToComplete.missionItemData.missionCompletedToday = true;//今日已完成
+                        RefreshMissionItem(missionItemToComplete);
+                    }
+
                 }
                 else//否则更新进度并保存
                 {
-                    SaveManager.Instance.Save(missionItemToComplete.missionItemData,missionItemToComplete.missionItemData.missionItemID.ToString());
-                    missionItemToComplete.missionItemData.NeedToUpdate = true;//刷新
+                    UpdateMissionItem(missionItemToComplete);
                 }
                 break;
             }
@@ -202,7 +210,22 @@ public class MissionItemManager : MonoBehaviour
         Debug.Log("完成MissionItem协程结束");
     }
 
-    private void DeleteMissionItem(MissionItem missionItemToComplete)
+    /// <summary>
+    /// 保存并刷新Mission Item
+    /// </summary>
+    /// <param name="missionItemToUpdate"></param>
+    public void UpdateMissionItem(MissionItem missionItemToUpdate)
+    {
+        SaveManager.Instance.Save(missionItemToUpdate.missionItemData,missionItemToUpdate.missionItemData.missionItemID.ToString());
+        missionItemToUpdate.missionItemData.NeedToUpdate = true;//刷新
+    }
+    private void RefreshMissionItem(MissionItem missionItemToRefresh)
+    {
+        missionItemToRefresh.RefreshMissionItem();
+        SaveManager.Instance.Save(missionItemToRefresh.missionItemData,missionItemToRefresh.missionItemData.missionItemID.ToString());
+    }
+
+    public void DestroyMissionItem(MissionItem missionItemToComplete)
     {
         MissionItemArray.Remove(missionItemToComplete.gameObject);//list中删除
         Destroy(missionItemToComplete.gameObject);//删除game object
