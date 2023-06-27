@@ -48,6 +48,7 @@ public class StatusManager : MonoBehaviour
         JsonUtility.FromJsonOverwrite(json,Instance.statusDataSo);
         UpdateTexts();
         SaveStatusData();
+        AppriseManager.Instance.NTC_ResetProperty();
     }
 
     public void LoadStatusData()

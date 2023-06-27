@@ -55,5 +55,11 @@ public class AppriseManager : MonoBehaviour
         textApprise.text = "新的一天，数据已更新";
         EnableApprise();
     }
+
+    public void NTC_ResetProperty()
+    {
+        textApprise.text = "已重置属性值";
+        EnableApprise();
+    }
     
 }
