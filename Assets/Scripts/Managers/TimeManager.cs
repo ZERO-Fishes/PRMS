@@ -54,10 +54,14 @@ public class TimeManager : MonoBehaviour
         
         PlayerPrefs.SetString("SavedTime",nowTime.ToString());//保存时间
         
-        //两种情况，一种是日期相差超过一天，一种是在同一天，但是保存的是4点前，当前是4点后
+        //两种情况，一种是日期相差超过一天，且今天过了4点，一种是在同一天，但是保存的是4点前，当前是4点后
         if (nowTime.Year>savedTime.Year||nowTime.DayOfYear>savedTime.DayOfYear)
         {
-            return true;
+            if (nowTime.Hour>=4)
+            {
+                return true;
+            }
+            
         }
         else if (savedTime.Hour<4 && nowTime.Hour>=4)
         {
